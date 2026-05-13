@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>HIMMA NURSERY AND PRIMARY SCHOOL</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* HEADER */
+
+header{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    color:white;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.logo h1{
+    font-size:28px;
+}
+
+.logo p{
+    font-size:14px;
+    margin-top:5px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:10px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#facc15;
+}
+
+/* HERO */
+
+.hero{
+    background:url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1400') center/cover;
+    height:500px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+
+.hero-content{
+    position:relative;
+    color:white;
+    max-width:800px;
+    padding:20px;
+}
+
+.hero-content h2{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.hero-content p{
+    font-size:18px;
+    line-height:1.6;
+}
+
+.hero-btns{
+    margin-top:30px;
+}
+
+.hero-btns button{
+    padding:14px 25px;
+    border:none;
+    border-radius:8px;
+    margin:10px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:bold;
+}
+
+.apply-btn{
+    background:#facc15;
+}
+
+.portal-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.hero-btns button:hover{
+    transform:scale(1.05);
+}
+
+/* SECTION */
+
+section{
+    padding:70px 40px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    font-size:36px;
+    color:#0f172a;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:#1e3a8a;
+}
+
+/* CLASSES */
+
+.class-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+}
+
+.class-box{
+    background:#1e3a8a;
+    color:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+}
+
+/* ANNOUNCEMENT */
+
+.announcement{
+    background:#facc15;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* FORM */
+
+form{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+form input,
+form select,
+form textarea{
+    width:100%;
+    padding:15px;
+    margin:12px 0;
+    border:1px solid #ccc;
+    border-radius:10px;
+}
+
+form button{
+    width:100%;
+    padding:15px;
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:30px;
+    margin-top:40px;
+}
+
+@media(max-width:768px){
+
+.hero-content h2{
+    font-size:32px;
+}
+
+nav{
+    margin-top:15px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="logo">
+<h1>HIMMA NURSERY AND PRIMARY SCHOOL</h1>
+<p>Jange Yari-Bori, Kafur LGA, Katsina State, Nigeria</p>
+</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#portal">Portal</a>
+<a href="#apply">Apply</a>
+<a href="#result">Result</a>
+<a href="#attendance">Attendance</a>
+<a href="#teachers">Teachers</a>
+<a href="#history">History</a>
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<h2>Welcome To HIMMA NURSERY AND PRIMARY SCHOOL</h2>
+
+<p>
+Quality Education For Future Leaders In Katsina State, Nigeria.
+We Build Knowledge, Discipline, Morality And Excellence.
+</p>
+
+<div class="hero-btns">
+<button class="apply-btn" onclick="showMessage('Admission Portal Opened Successfully!')">
+Apply Now
+</button>
+
+<button class="portal-btn" onclick="showMessage('Student Portal Loading...')">
+Student Portal
+</button>
+</div>
+
+</div>
+
+</section>
+
+<!-- PORTAL FEATURES -->
+
+<section id="portal">
+
+<div class="section-title">
+<h2>School Portal Services</h2>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Online Registration</h3>
+<p>Students can apply and register online easily.</p>
+</div>
+
+<div class="card">
+<h3>Check Result</h3>
+<p>Access student examination results online.</p>
+</div>
+
+<div class="card">
+<h3>Check Attendance</h3>
+<p>Parents can monitor student attendance records.</p>
+</div>
+
+<div class="card">
+<h3>School Announcement</h3>
+<p>Get latest school updates and news instantly.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- CLASSES -->
+
+<section>
+
+<div class="section-title">
+<h2>School Classes</h2>
+</div>
+
+<div class="class-list">
+
+<div class="class-box">NURSERY 1</div>
+<div class="class-box">NURSERY 2</div>
+<div class="class-box">NURSERY 3</div>
+<div class="class-box">PRIMARY 1</div>
+<div class="class-box">PRIMARY 2</div>
+<div class="class-box">PRIMARY 3</div>
+<div class="class-box">PRIMARY 4</div>
+<div class="class-box">PRIMARY 5</div>
+<div class="class-box">PRIMARY 6</div>
+
+</div>
+
+</section>
+
+<!-- ANNOUNCEMENT -->
+
+<section>
+
+<div class="section-title">
+<h2>Latest Announcement</h2>
+</div>
+
+<div class="announcement">
+📢 2026 Admission Form Is Currently Available For All New Students.
+</div>
+
+</section>
+
+<!-- APPLY -->
+
+<section id="apply">
+
+<div class="section-title">
+<h2>Admission Registration Form</h2>
+</div>
+
+<form onsubmit="submitForm(event)">
+
+<input type="text" placeholder="Student Full Name" required>
+
+<select required>
+<option value="">Select Class</option>
+<option>NURSERY 1</option>
+<option>NURSERY 2</option>
+<option>NURSERY 3</option>
+<option>PRIMARY 1</option>
+<option>PRIMARY 2</option>
+<option>PRIMARY 3</option>
+<option>PRIMARY 4</option>
+<option>PRIMARY 5</option>
+<option>PRIMARY 6</option>
+</select>
+
+<input type="text" placeholder="Parent Name" required>
+
+<input type="tel" placeholder="Phone Number" required>
+
+<textarea rows="5" placeholder="Address"></textarea>
+
+<button type="submit">Submit Registration</button>
+
+</form>
+
+</section>
+
+<!-- TEACHERS -->
+
+<section id="teachers">
+
+<div class="section-title">
+<h2>School Teachers</h2>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Head Teacher</h3>
+<p>Responsible for school administration and leadership.</p>
+</div>
+
+<div class="card">
+<h3>Nursery Teachers</h3>
+<p>Dedicated teachers for early childhood education.</p>
+</div>
+
+<div class="card">
+<h3>Primary Teachers</h3>
+<p>Experienced teachers for all primary classes.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- HISTORY -->
+
+<section id="history">
+
+<div class="section-title">
+<h2>School History</h2>
+</div>
+
+<div class="card">
+
+<p style="line-height:2;">
+
+HIMMA NURSERY AND PRIMARY SCHOOL was established to provide quality Islamic and western education for children in Jange Yari-Bori, Kafur Local Government Area of Katsina State, Nigeria.
+
+The school focuses on academic excellence, moral discipline, leadership training and community development. Over the years, the school has continued to nurture young learners into responsible future leaders.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+© 2026 HIMMA NURSERY AND PRIMARY SCHOOL | All Rights Reserved
+</p>
+
+</footer>
+
+<script>
+
+function showMessage(message){
+    alert(message);
+}
+
+function submitForm(event){
+    event.preventDefault();
+    alert("Registration Submitted Successfully!");
+}
+
+</script>
+
+</body>
+</html>
