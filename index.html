@@ -1,607 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard</title>
 
-<title>HIMMA NURSERY AND PRIMARY SCHOOL</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
+    body {
+      background: #0f172a;
+      color: white;
+    }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
 
-body{
-    background:#f5f7fb;
-    color:#222;
-}
+    .sidebar {
+      width: 250px;
+      background: #111827;
+      padding: 20px;
+    }
 
-/* HEADER */
+    .sidebar h2 {
+      margin-bottom: 30px;
+      color: #38bdf8;
+    }
 
-header{
-    background:#0f172a;
-    color:#fff;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 7%;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
+    .sidebar ul {
+      list-style: none;
+    }
 
-.logo h1{
-    font-size:26px;
-    color:#facc15;
-}
+    .sidebar ul li {
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-.logo p{
-    font-size:13px;
-    margin-top:4px;
-}
+    .sidebar ul li:hover,
+    .sidebar ul .active {
+      background: #1e293b;
+    }
 
-nav a{
-    color:#fff;
-    text-decoration:none;
-    margin-left:22px;
-    font-size:15px;
-    transition:0.3s;
-}
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
 
-nav a:hover{
-    color:#facc15;
-}
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
 
-/* HERO */
+    .profile-box {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-.hero{
-    height:90vh;
-    background:
-    linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
-    url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1400')
-    center/cover;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-}
+    .profile-box img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
 
-.hero-content{
-    max-width:850px;
-    color:#fff;
-}
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
 
-.hero-content h2{
-    font-size:55px;
-    line-height:1.3;
-    margin-bottom:20px;
-}
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
 
-.hero-content p{
-    font-size:18px;
-    line-height:1.8;
-}
+    .card:hover {
+      transform: translateY(-5px);
+    }
 
-.hero-btns{
-    margin-top:35px;
-}
+    .card h3 {
+      margin-bottom: 10px;
+      color: #94a3b8;
+    }
 
-.hero-btns button{
-    padding:15px 28px;
-    border:none;
-    border-radius:10px;
-    font-size:16px;
-    cursor:pointer;
-    margin:10px;
-    transition:0.3s;
-    font-weight:600;
-}
+    .chart-section {
+      margin-bottom: 30px;
+    }
 
-.apply-btn{
-    background:#facc15;
-}
+    .chart-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 20px;
+    }
 
-.portal-btn{
-    background:#2563eb;
-    color:white;
-}
+    .activity-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
 
-.hero-btns button:hover{
-    transform:translateY(-4px);
-}
+    .activity-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 20px;
+    }
 
-/* SECTION */
+    .activity-card ul {
+      margin-top: 15px;
+    }
 
-section{
-    padding:80px 7%;
-}
+    .activity-card ul li {
+      margin-bottom: 15px;
+    }
 
-.section-title{
-    text-align:center;
-    margin-bottom:50px;
-}
+    .activity-card table {
+      width: 100%;
+      margin-top: 15px;
+      border-collapse: collapse;
+    }
 
-.section-title h2{
-    font-size:40px;
-    color:#0f172a;
-}
+    .activity-card table th,
+    .activity-card table td {
+      padding: 10px;
+      border-bottom: 1px solid #334155;
+      text-align: left;
+    }
 
-/* CARDS */
+    @media(max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-}
+      .sidebar {
+        width: 100%;
+      }
 
-.card{
-    background:#fff;
-    padding:30px;
-    border-radius:18px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-10px);
-}
-
-.card h3{
-    color:#1e3a8a;
-    margin-bottom:15px;
-    font-size:22px;
-}
-
-.card p{
-    line-height:1.8;
-    color:#555;
-}
-
-/* CLASSES */
-
-.class-list{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:20px;
-}
-
-.class-box{
-    background:#1e3a8a;
-    color:white;
-    text-align:center;
-    padding:25px;
-    border-radius:15px;
-    font-size:18px;
-    font-weight:600;
-    transition:0.3s;
-}
-
-.class-box:hover{
-    background:#2563eb;
-}
-
-/* ANNOUNCEMENT */
-
-.announcement{
-    background:#facc15;
-    padding:30px;
-    border-radius:18px;
-    text-align:center;
-    font-size:20px;
-    font-weight:600;
-}
-
-/* FORM */
-
-form{
-    background:white;
-    max-width:750px;
-    margin:auto;
-    padding:35px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
-
-form input,
-form select,
-form textarea{
-    width:100%;
-    padding:16px;
-    margin:12px 0;
-    border:1px solid #ccc;
-    border-radius:10px;
-    font-size:15px;
-}
-
-form button{
-    width:100%;
-    padding:16px;
-    background:#1e3a8a;
-    color:white;
-    border:none;
-    border-radius:10px;
-    font-size:18px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-/* RESULT CHECKER */
-
-.result-box{
-    background:white;
-    padding:35px;
-    border-radius:20px;
-    max-width:650px;
-    margin:auto;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
-
-.result-box input{
-    width:100%;
-    padding:15px;
-    margin-top:15px;
-    border:1px solid #ccc;
-    border-radius:10px;
-}
-
-.result-box button{
-    width:100%;
-    padding:15px;
-    margin-top:15px;
-    border:none;
-    background:#10b981;
-    color:white;
-    border-radius:10px;
-    font-size:17px;
-    cursor:pointer;
-}
-
-/* FOOTER */
-
-footer{
-    background:#0f172a;
-    color:white;
-    text-align:center;
-    padding:35px;
-}
-
-footer p{
-    line-height:2;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-header{
-    flex-direction:column;
-    text-align:center;
-}
-
-nav{
-    margin-top:15px;
-}
-
-nav a{
-    display:inline-block;
-    margin:8px;
-}
-
-.hero{
-    height:auto;
-    padding:100px 20px;
-}
-
-.hero-content h2{
-    font-size:32px;
-}
-
-.hero-content p{
-    font-size:15px;
-}
-
-.hero-btns{
-    display:flex;
-    flex-direction:column;
-}
-
-.hero-btns button{
-    width:100%;
-}
-
-.section-title h2{
-    font-size:28px;
-}
-
-.class-list{
-    grid-template-columns:1fr 1fr;
-}
-
-}
-
-</style>
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
+<div class="container">
 
-<header>
+  <aside class="sidebar">
+    <h2>Himma Portal</h2>
 
-<div class="logo">
-<h1>HIMMA SCHOOL</h1>
-<p>Jange Yari-Bori, Kafur LGA, Katsina State</p>
-</div>
+    <ul>
+      <li class="active">Dashboard</li>
+      <li>Profile</li>
+      <li>Results</li>
+      <li>Attendance</li>
+      <li>Courses</li>
+      <li>Assignments</li>
+      <li>Fees</li>
+      <li>Notifications</li>
+      <li>Settings</li>
+      <li>Logout</li>
+    </ul>
+  </aside>
 
-<nav>
-<a href="#">Home</a>
-<a href="#portal">Portal</a>
-<a href="#classes">Classes</a>
-<a href="#apply">Apply</a>
-<a href="#result">Result</a>
-<a href="#teachers">Teachers</a>
-</nav>
+  <main class="main-content">
 
-</header>
+    <header>
+      <div>
+        <h1>Welcome Back 👋</h1>
+        <p>Student Dashboard</p>
+      </div>
 
-<!-- HERO -->
+      <div class="profile-box">
+        <img src="https://i.pravatar.cc/100" alt="student" />
 
-<section class="hero">
+        <div>
+          <h3>Silas Musa</h3>
+          <p>ND II Software Engineering</p>
+        </div>
+      </div>
+    </header>
 
-<div class="hero-content">
+    <section class="cards">
 
-<h2>
-HIMMA NURSERY AND PRIMARY SCHOOL
-</h2>
+      <div class="card">
+        <h3>GPA</h3>
+        <h1>4.52</h1>
+      </div>
 
-<p>
-Quality Education For Future Leaders In Nigeria.
-Academic Excellence, Discipline And Morality.
-</p>
+      <div class="card">
+        <h3>Attendance</h3>
+        <h1>92%</h1>
+      </div>
 
-<div class="hero-btns">
+      <div class="card">
+        <h3>Courses</h3>
+        <h1>8</h1>
+      </div>
 
-<button class="apply-btn" onclick="showAlert('Admission Form Opened Successfully')">
-Apply Now
-</button>
+      <div class="card">
+        <h3>Fees Status</h3>
+        <h1>Paid</h1>
+      </div>
 
-<button class="portal-btn" onclick="showAlert('Student Portal Loading...')">
-Student Portal
-</button>
+    </section>
 
-</div>
+    <section class="chart-section">
+      <div class="chart-card">
+        <h2>Performance Analytics</h2>
+        <canvas id="performanceChart"></canvas>
+      </div>
+    </section>
 
-</div>
+    <section class="activity-section">
 
-</section>
+      <div class="activity-card">
+        <h2>Recent Activities</h2>
 
-<!-- PORTAL -->
+        <ul>
+          <li>✅ Assignment uploaded successfully</li>
+          <li>📚 New course material added</li>
+          <li>📝 CBT exam starts tomorrow</li>
+          <li>💳 School fees payment confirmed</li>
+        </ul>
+      </div>
 
-<section id="portal">
+      <div class="activity-card">
+        <h2>Registered Courses</h2>
 
-<div class="section-title">
-<h2>School Portal Services</h2>
-</div>
+        <table>
+          <tr>
+            <th>Course</th>
+            <th>Status</th>
+          </tr>
 
-<div class="cards">
+          <tr>
+            <td>Web Development</td>
+            <td>Registered</td>
+          </tr>
 
-<div class="card">
-<h3>Online Registration</h3>
-<p>Apply for admission online from anywhere in Nigeria.</p>
-</div>
+          <tr>
+            <td>Database Systems</td>
+            <td>Registered</td>
+          </tr>
 
-<div class="card">
-<h3>Check Result</h3>
-<p>Students can access examination results instantly.</p>
-</div>
+          <tr>
+            <td>Networking</td>
+            <td>Registered</td>
+          </tr>
 
-<div class="card">
-<h3>Attendance Checker</h3>
-<p>Parents can monitor student attendance records online.</p>
-</div>
+        </table>
+      </div>
 
-<div class="card">
-<h3>Announcements</h3>
-<p>Get latest school news, updates and important notices.</p>
-</div>
+    </section>
 
-</div>
-
-</section>
-
-<!-- CLASSES -->
-
-<section id="classes">
-
-<div class="section-title">
-<h2>School Classes</h2>
-</div>
-
-<div class="class-list">
-
-<div class="class-box">NURSERY 1</div>
-<div class="class-box">NURSERY 2</div>
-<div class="class-box">NURSERY 3</div>
-<div class="class-box">PRIMARY 1</div>
-<div class="class-box">PRIMARY 2</div>
-<div class="class-box">PRIMARY 3</div>
-<div class="class-box">PRIMARY 4</div>
-<div class="class-box">PRIMARY 5</div>
-<div class="class-box">PRIMARY 6</div>
-
-</div>
-
-</section>
-
-<!-- ANNOUNCEMENT -->
-
-<section>
-
-<div class="section-title">
-<h2>Latest Announcement</h2>
-</div>
-
-<div class="announcement">
-📢 2026/2027 Admission Form Is Currently Available For New Students.
-</div>
-
-</section>
-
-<!-- APPLY -->
-
-<section id="apply">
-
-<div class="section-title">
-<h2>Admission Registration</h2>
-</div>
-
-<form onsubmit="submitForm(event)">
-
-<input type="text" placeholder="Student Full Name" required>
-
-<select required>
-<option value="">Select Class</option>
-
-<option>NURSERY 1</option>
-<option>NURSERY 2</option>
-<option>NURSERY 3</option>
-<option>PRIMARY 1</option>
-<option>PRIMARY 2</option>
-<option>PRIMARY 3</option>
-<option>PRIMARY 4</option>
-<option>PRIMARY 5</option>
-<option>PRIMARY 6</option>
-
-</select>
-
-<input type="text" placeholder="Parent/Guardian Name" required>
-
-<input type="tel" placeholder="Phone Number" required>
-
-<textarea rows="5" placeholder="Home Address"></textarea>
-
-<button type="submit">Submit Registration</button>
-
-</form>
-
-</section>
-
-<!-- RESULT -->
-
-<section id="result">
-
-<div class="section-title">
-<h2>Check Student Result</h2>
-</div>
-
-<div class="result-box">
-
-<p>Enter Student Registration Number</p>
-
-<input type="text" id="regNumber" placeholder="e.g HIM/2026/001">
-
-<button onclick="checkResult()">
-Check Result
-</button>
+  </main>
 
 </div>
-
-</section>
-
-<!-- TEACHERS -->
-
-<section id="teachers">
-
-<div class="section-title">
-<h2>School Teachers</h2>
-</div>
-
-<div class="cards">
-
-<div class="card">
-<h3>Head Teacher</h3>
-<p>Provides leadership and administration for academic excellence.</p>
-</div>
-
-<div class="card">
-<h3>Nursery Teachers</h3>
-<p>Qualified teachers for early childhood development.</p>
-</div>
-
-<div class="card">
-<h3>Primary Teachers</h3>
-<p>Experienced educators for all primary school subjects.</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- HISTORY -->
-
-<section>
-
-<div class="section-title">
-<h2>School History</h2>
-</div>
-
-<div class="card">
-
-<p style="line-height:2;">
-HIMMA NURSERY AND PRIMARY SCHOOL was established to provide quality education for children in Jange Yari-Bori, Kafur Local Government Area, Katsina State, Nigeria.
-
-The school combines western and Islamic education to nurture responsible future leaders with strong academic and moral values.
-</p>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-
-<p>
-© 2026 HIMMA NURSERY AND PRIMARY SCHOOL <br>
-All Rights Reserved
-</p>
-
-    <p>|| BY SILAS YAHAYA MPRO ||</p>
-
-</footer>
 
 <script>
+  const ctx = document.getElementById('performanceChart');
 
-function showAlert(message){
-    alert(message);
-}
-
-function submitForm(event){
-    event.preventDefault();
-    alert("Registration Submitted Successfully!");
-}
-
-function checkResult(){
-
-let reg = document.getElementById("regNumber").value;
-
-if(reg === ""){
-    alert("Please Enter Registration Number");
-}
-else{
-    alert("Result For " + reg + " Will Display Here.");
-}
-
-}
-
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+      datasets: [{
+        label: 'Academic Performance',
+        data: [65, 72, 78, 85, 92],
+        borderWidth: 3,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: {
+            color: 'white'
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: 'white'
+          }
+        },
+        y: {
+          ticks: {
+            color: 'white'
+          }
+        }
+      }
+    }
+  });
 </script>
 
 </body>
